@@ -14,6 +14,10 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///lanchonete.db"
 app.config["SECRET_KEY"] = "sua_chave_super_secreta"
 db.init_app(app)
 
+load_dotenv()  # 🔹 Carregar variáveis de ambiente
+SENHA_MASTER = os.getenv("SENHA_MASTER", "Vix@loja1!")  # 🔹 Defina uma senha segura
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=5)  # 🔹 Usuário será desconectado após 5 minutos
+
 # ---------------------- ROTA PRINCIPAL ---------------------- #
 @app.route("/")
 def home():
@@ -224,9 +228,6 @@ def logout():
     return redirect(url_for("pedir_senha"))  # 🔹 Redireciona para a tela de login
 
 # ---------------------- ADICIONAR PRODUTO ---------------------- #
-load_dotenv()  # 🔹 Carregar variáveis de ambiente
-SENHA_MASTER = os.getenv("SENHA_MASTER", "123")  # 🔹 Defina uma senha segura
-app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=5)  # 🔹 Usuário será desconectado após 5 minutos
 
 @app.route("/adicionar_produto", methods=["POST"])
 def adicionar_produto():
