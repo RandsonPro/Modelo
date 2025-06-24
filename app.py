@@ -357,6 +357,11 @@ def dashboard_admin():
                            pedidos_cancelados=pedidos_cancelados,
                            faturamento_total=faturamento_total)
 
+
+@app.route("/lojas")
+def lojas():
+    return render_template("lojas.html")
+
 # ---------------------- INICIAR APLICACÃO ---------------------- #
 if __name__ == "__main__":
     with app.app_context():
